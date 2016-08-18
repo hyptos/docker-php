@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+
+    <!--[if IE]>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<![endif]-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Antoine Martin · Portfolio</title>
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <meta content="Portfolio of an online webdeveloper" name="description">
+
+    <meta content="Antoine Martin" name="author">
+
+    <link rel="icon" href="favicon.ico">
+
+
+
+
+
+    <!-- So sad to add this :/ -->
+
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="apple-touch-icon-precomposed.png" />
+
+
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static',filename='css/bootstrap-theme.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('static',filename='css/print.css') }}" rel="stylesheet">
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+
+  </head>
+
+ 
+
+  <body> 
+
+
+
+      <div class="header">
+
+            <a class="brand text-center" href="index.html">
+
+                <div id="logo"><div class="logo">AM</div></div>
+
+            </a>
+
+      </div>
+
+
+
+    <div class="container">
+
+        <!-- BANNER -->
+
+        <div class="jumbotron text-center" id="banner">
+
+            <h1>Hello!</h1>
+
+
+
+            <h2>I'm <span class="emphasis">Antoine Martin,</span> a Web developer in Lyon - France.</h2>
+
+
+
+            <h2>I love building web applications.</h2>
+
+      </div>
+
+
+
+      </div>
+
+      <div class="resume">
+
+                    <div class="text-center resume">
+
+              <a id="download" href="{{ url_for('static',filename='CV_AntoineMartin.pdf') }}" class="btn btn-lg btn-default">Download my resume</a>
+
+            </div>
+
+      </div>
+
+      <div class="container">
+
+
+
+      <div class="row marketing">
+
+        <div class="col-lg-6 col-xs-12 col-md-6">
+
+            <h2 class="text-center">SAY HELLO</h2>
+
+            <hr>
+
+
+
+            <form method="post" id="form" action="contact">
+
+              <div class="form-group">
+
+                <div class="form-group">
+
+                    <label for="name" class="sr-only">Name</label>
+
+                      <input class="form-control" name="name" id="name"
+
+                        placeholder="Name">
+
+                  </div>
+
+                <div class="form-group">
+
+                    <label for="email" class="sr-only">Email address</label>
+
+                      <input type="email" class="form-control" name="email" id="email"
+
+                        placeholder="Mail">
+
+                  </div>
+
+              </div>
+
+              <div class="form-group">
+
+                  <textarea id="message" name="message" class="form-control" placeholder="Your Message" rows="4"></textarea>
+
+              </div>
+
+              <div id="notification">
+
+                <p></p>
+
+              </div>
+
+              &nbsp;
+
+                                      <div class="form-group">
+
+                  <button id="submitButton" type="submit" class="btn btn-lg btn-block btn-primary">Submit</button>
+
+              </div>
+
+          </form>
+
+
+
+        </div>
+
+
+
+        <div class="follow col-lg-6 col-xs-12 col-md-6">
+
+            <h2 class="text-center">FOLLOW ME</h2>
+
+            <hr>
+
+            <div class="text-center">
+
+              <a href="https://github.com/hyptos"><img alt="Github" src="{{ url_for('static',filename='img/github-64.png') }}" width="64" height="64"></a>
+
+              <a href="http://www.linkedin.com/pub/antoine-martin/27/601/a7b"><img alt="Linkedin" src="{{ url_for('static',filename='img/linkedin-64.png') }}" width="64" height="64"></a>
+
+              <a href="https://twitter.com/techpaf"><img alt="Twitter" src="{{ url_for('static',filename='img/twitter-64.png') }}" width="64" height="64"></a>
+
+            </div>
+
+        </div>
+
+      </div>
+
+
+
+      <br><br>
+
+
+
+      <div class="col-lg-12 text-center">
+
+        <p>&copy; 2014 Antoine Martin <a href="https://plus.google.com/+AntoineMartin974?rel=author">Google</a></p>
+
+      </div>
+
+
+
+    </div> <!-- /container -->
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+
+    ================================================== -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+
+    <script type="text/javascript">
+
+      $(document).ready(function() {
+
+        // lorsque je soumets le formulaire
+
+        $('#form').on('submit', function() {
+
+    
+
+            // je récupère les valeurs
+
+            var name = $('#name').val();
+
+            var email = $('#email').val();
+
+            var message = $('#message').val();
+
+
+
+            // je vérifie une première fois pour ne pas lancer la requête HTTP
+
+            if(name ==''){
+
+                $("#notification").text('Please enter a name !');
+
+                $("#notification").addClass('bg-warning');   
+
+                $("#name").addClass('has-error');   
+
+            } else if (email == ''){
+
+                $("#notification p").text('Please enter a valid email !');
+
+                $("#notification p").addClass('bg-warning');
+
+                $("#email").addClass('has-error');
+
+            }else if(message == ''){
+
+                $("#notification").text('Please enter a message !');
+
+                $("#notification").addClass('bg-warning');              
+
+                $("#message").addClass('has-error');              
+
+            }     
+
+            else {
+
+                // appel Ajax
+
+                $.ajax({
+
+                    url: $(this).attr('action'), // le nom du fichier indiqué dans le formulaire
+
+                    type: $(this).attr('method'), // la méthode indiquée dans le formulaire (get ou post)
+
+                    data: $(this).serialize(), // je sérialise les données, ici les $_POST
+
+                    success: function(html) { // je récupère la réponse du fichier PHP
+
+                        $("#submitButton").text(html);
+
+                        $("#notification").text(' ');
+
+                        $("#submitButton").removeClass('btn-primary');
+
+                        $("#submitButton").addClass('btn-success');
+
+                        $("#submitButton").attr('disabled','disabled');
+
+                    },
+
+                    error: function(html) {
+
+                        $("#submitButton").text('Error I\'m sorry, try later please !');                 
+
+                    }
+
+                });
+
+            }
+
+            return false; // j'empêche le navigateur de soumettre lui-même le formulaire
+
+        });
+
+    });
+
+    </script>
+
+    <script >
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+
+
+  ga('create', 'UA-XXXXXXX', 'auto');
+
+  ga('send', 'pageview');
+
+
+
+</script>
+
+  </body>
+
+</html>
+
+
+
